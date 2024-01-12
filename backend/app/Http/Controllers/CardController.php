@@ -89,11 +89,14 @@ class CardController extends Controller
     {
 
 
-        $card = Card::find($id);
+        $card = Card::withTrashed()->find($id);
         if (!$card) {
             return response()->json(['message' => 'Card not found'], 404);
         }
-
+        if ($card->trashed()) {
+            $card->forceDelete();
+            return response()->json(['message' => 'Card permanently deleted'], 204);
+        }
         $card->delete();
 
 

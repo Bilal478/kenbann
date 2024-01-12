@@ -19,7 +19,7 @@ use App\Http\Controllers\ExportController;
 
 // Columns
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/columns', [ColumnController::class, 'index']);
+    Route::get('/columns/{status?}/{data?}', [ColumnController::class, 'index']);
     Route::post('/columns', [ColumnController::class, 'store']);
     Route::delete('/columns/{column}', [ColumnController::class, 'destroy']);
 
